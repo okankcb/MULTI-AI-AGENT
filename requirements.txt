@@ -5,3 +5,5 @@ uvicorn
 pydantic
 streamlit
 langgraph
+langchain
+langchain-core
