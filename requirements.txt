@@ -7,3 +7,4 @@ streamlit
 langgraph
 langchain
 langchain-core
+fastapi

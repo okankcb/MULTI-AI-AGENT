@@ -9,5 +9,8 @@ Requires-Dist: uvicorn
 Requires-Dist: pydantic
 Requires-Dist: streamlit
 Requires-Dist: langgraph
+Requires-Dist: langchain
+Requires-Dist: langchain-core
+Requires-Dist: fastapi
 Dynamic: author
 Dynamic: requires-dist
