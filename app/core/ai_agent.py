@@ -1,24 +1,24 @@
 from langchain_groq import ChatGroq
 from langchain_community.tools.tavily_search import TavilySearchResults
 
-from langchain.agents import create_agent
+from langgraph.prebuilt import create_react_agent
 from langchain_core.messages.ai import AIMessage
 
 from app.config.settings import settings
 
 def get_response_from_ai_agents(llm_id, query, allow_search, system_prompt):
-    
-    llm = ChatGroq(model = lmm_id)
 
-    tools = [TavilySearchResults(max_results = 2)] if allow_search else []
+    llm = ChatGroq(model=llm_id)
 
-    agent = create_agent(
-        model = llm,
-        tools = tools,
-        state_modifier = system_prompt
+    tools = [TavilySearchResults(max_results=2)] if allow_search else []
+
+    agent = create_react_agent(
+        model=llm,
+        tools=tools,
+        prompt=system_prompt
     )
 
-    state = {"messages": query}
+    state = {"messages": [("human", msg) for msg in query]}
 
     response = agent.invoke(state)
 

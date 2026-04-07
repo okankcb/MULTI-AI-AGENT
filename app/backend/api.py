@@ -16,6 +16,10 @@ class RequestState(BaseModel):
     messages: List[str]
     allow_search: bool
 
+@app.get("/")
+def health_check():
+    return {"status": "ok"}
+
 @app.post("/chat")
 def chat_endpoint(request:RequestState):
     logger.info(f"Received request for model : {request.model_name}")
@@ -23,7 +27,7 @@ def chat_endpoint(request:RequestState):
     if request.model_name not in settings.ALLOWED_MODEL_NAMES:
         logger.warning("Invalid model name")
         raise HTTPException(status_code=400, detail="Invalid model name")
-    
+
     try:
         response = get_response_from_ai_agents(
             request.model_name,
@@ -38,5 +42,6 @@ def chat_endpoint(request:RequestState):
     except Exception as e :
         logger.error("Some error occured during response generation")
         raise HTTPException(
-            status_code=500, 
+            status_code=500,
             detail= str(CustomException("Failed to get AI response", error_detail= e))
+        )

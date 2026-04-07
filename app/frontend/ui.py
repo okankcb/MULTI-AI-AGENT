@@ -25,7 +25,7 @@ if st.button("Ask Agent") and user_query.strip():
         "model_name" : selected_model,
         "system_prompt": system_prompt,
         "messages": [user_query],
-        "allow_web_search" : allow_web_search
+        "allow_search" : allow_web_search
     }
 
     try:
@@ -42,7 +42,7 @@ if st.button("Ask Agent") and user_query.strip():
 
         else:
             logger.error("Backend error")
-            st.error("Error with backend")
+            st.error(f"Error with backend (status {response.status_code}): {response.text}")
 
     except Exception as e:
         logger.error("Error occured while sending request to backend")
