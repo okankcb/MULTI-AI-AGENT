@@ -36,7 +36,7 @@ pipeline{
 			}
 		}
 
-    stage('Build and Push Docker Image to ECR') {
+    /*stage('Build and Push Docker Image to ECR') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-token']]) {
                     script {
@@ -68,7 +68,7 @@ pipeline{
                 }
             }
         }
-     }
+     }*/
 
     }
 }
