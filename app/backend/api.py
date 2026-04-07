@@ -20,7 +20,7 @@ class RequestState(BaseModel):
 def health_check():
     return {"status": "ok"}
 
-@app.post("/chat")
+@app.post("/chat", responses={400: {"description": "Invalid model name"}, 500: {"description": "Failed to get AI response"}})
 def chat_endpoint(request:RequestState):
     logger.info(f"Received request for model : {request.model_name}")
 
