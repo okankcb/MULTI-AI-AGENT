@@ -4,9 +4,9 @@ pipeline{
     environment {
         SONAR_PROJECT_KEY = 'LLMOPS'
 		SONAR_SCANNER_HOME = tool 'Sonarqube'
-        /*AWS_REGION = 'us-east-1'
+        AWS_REGION = 'eu-west-3'
         ECR_REPO = 'my-repo'
-        IMAGE_TAG = 'latest'*/
+        IMAGE_TAG = 'latest'
 	}
 
     stages{
@@ -36,7 +36,7 @@ pipeline{
 			}
 		}
 
-    /*stage('Build and Push Docker Image to ECR') {
+    stage('Build and Push Docker Image to ECR') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-token']]) {
                     script {
@@ -54,7 +54,7 @@ pipeline{
             }
         }
 
-        stage('Deploy to ECS Fargate') {
+    /*    stage('Deploy to ECS Fargate') {
     steps {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-token']]) {
             script {
