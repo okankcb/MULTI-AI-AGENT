@@ -1,0 +1,28 @@
+## Image de base
+FROM python:3.13-slim
+
+## Variables d'environnement essentielles
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+## Répertoire de travail dans le conteneur Docker
+WORKDIR /app
+
+## Installation des dépendances système
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+## Copie de tous les fichiers locaux vers /app
+COPY . .
+
+## Installation du projet via setup.py
+RUN pip install --no-cache-dir -e .
+
+# Ports exposés
+EXPOSE 8501
+EXPOSE 9999
+
+# Lancement de l'application
+CMD ["python", "app/main.py"]
